@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "36300842547",
+    "firebase_url": "https://jiotest-10a62.firebaseio.com",
+    "project_id": "jiotest-10a62",
+    "storage_bucket": "jiotest-10a62.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36300842547:android:b43cfab22c0fd42b80e546",
+        "android_client_info": {
+          "package_name": "com.example.jio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36300842547-3tb3sf01d92hvgl499sbbk1t2c4btl15.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDC6JFOJ69PuXxDAVI0HNL1SW6A5Fs6Mas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36300842547-3tb3sf01d92hvgl499sbbk1t2c4btl15.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
