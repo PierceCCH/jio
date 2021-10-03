@@ -37,7 +37,7 @@ class _PickTimeState extends State<PickTime> {
             decoration: BoxDecoration(gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
-                colors: [Colors.blue[100], Colors.blue[300]]
+                colors: [Colors.blue[99], Colors.blue[300]]
               )
             ),
           ),
