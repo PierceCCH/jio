@@ -9,12 +9,11 @@ import '../friendRequests/friend_requests.dart';
 class FriendsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Person user = Provider.of<Person>(context);
 
-    User user = Provider.of<User>(context);
-
-    return StreamProvider<List<User>>.value(
-          value: DatabaseService(uid: user.uid).friends,
-          child: Scaffold(
+    return StreamProvider<List<Person>>.value(
+        value: DatabaseService(uid: user.uid).friends,
+        child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
             centerTitle: true,
@@ -22,26 +21,28 @@ class FriendsPage extends StatelessWidget {
             backgroundColor: Colors.orange,
             actions: [
               IconButton(
-                onPressed: (){
-                  Navigator.push(context, new MaterialPageRoute(
-                  builder: (context) => FriendRequests()));
-                }, 
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => FriendRequests()));
+                },
                 icon: Icon(Icons.notifications),
                 iconSize: 20,
               ),
               IconButton(
-                onPressed: (){
-                  Navigator.push(context, new MaterialPageRoute(
-                  builder: (context) => AddFriends()));
-                }, 
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => AddFriends()));
+                },
                 icon: Icon(Icons.person_add),
                 iconSize: 20,
               ),
             ],
           ),
-          body: Container(
-            child: FriendList()), 
-          )
-    );
+          body: Container(child: FriendList()),
+        ));
   }
 }

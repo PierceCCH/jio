@@ -34,18 +34,21 @@ class _TravelViewState extends State<TravelView> {
   //drawing profile pic as bitmap
   Future<Uint8List> getBytesFromAsset(String profilePic, int width) async {
     ByteData data = await rootBundle.load(profilePic);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
+        .buffer
+        .asUint8List();
   }
-
 
   void updateMarkerAndCircle(LocationData newLocalData, Uint8List imageData) {
     LatLng latlng = LatLng(newLocalData.latitude, newLocalData.longitude);
     this.setState(() {
+      Set<Marker> markers = widget.markers;
       markers.add(Marker(
           markerId: MarkerId("home"),
-          position: latlng, 
+          position: latlng,
           rotation: newLocalData.heading,
           draggable: false,
           zIndex: 2,
@@ -61,41 +64,41 @@ class _TravelViewState extends State<TravelView> {
           fillColor: Colors.blue.withAlpha(70));
     });
   }
-    
-  void getCurrentLocation(User user) async {
-    try {
 
+  void getCurrentLocation(Person user) async {
+    try {
       Uint8List imageData = await getBytesFromAsset(profilePic, 100);
       var location = await _locationTracker.getLocation();
-      
+
       updateMarkerAndCircle(location, imageData);
 
       if (_locationSubscription != null) {
         _locationSubscription.cancel();
       }
 
-      _locationSubscription = _locationTracker.onLocationChanged.listen((newLocalData) {
-        
+      _locationSubscription =
+          _locationTracker.onLocationChanged.listen((newLocalData) {
         if (_controller != null) {
-          _controller.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
-              bearing: 192.8334901395799,
-              target: LatLng(newLocalData.latitude, newLocalData.longitude),
-              tilt: 0,
-              zoom: 18.00)));
+          _controller.animateCamera(CameraUpdate.newCameraPosition(
+              new CameraPosition(
+                  bearing: 192.8334901395799,
+                  target: LatLng(newLocalData.latitude, newLocalData.longitude),
+                  tilt: 0,
+                  zoom: 18.00)));
           updateMarkerAndCircle(newLocalData, imageData);
-          
+
           //update current user location to firebase
-          try{
-            DatabaseService(uid: user.uid).updateUserLocation(user.uid, newLocalData.latitude, newLocalData.longitude);
+          try {
+            DatabaseService(uid: user.uid).updateUserLocation(
+                user.uid, newLocalData.latitude, newLocalData.longitude);
             print("${newLocalData.latitude}");
             print("${newLocalData.longitude}");
-          }catch(e){
+          } catch (e) {
             print(e.toString());
             return null;
           }
         }
       });
-
     } on PlatformException catch (e) {
       if (e.code == 'PERMISSION_DENIED') {
         debugPrint("Permission Denied");
@@ -112,10 +115,9 @@ class _TravelViewState extends State<TravelView> {
   }
 
   @override
-
   Widget build(BuildContext context) {
     Set<Marker> markers = widget.markers;
-    final user = Provider.of<User>(context);
+    final user = Provider.of<Person>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Meeting Name"),
@@ -129,7 +131,6 @@ class _TravelViewState extends State<TravelView> {
         onMapCreated: (GoogleMapController controller) {
           _controller = controller;
         },
-
       ),
       floatingActionButton: Padding(
         padding: EdgeInsets.only(right: 300),

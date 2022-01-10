@@ -9,32 +9,25 @@ class FriendList extends StatefulWidget {
 }
 
 class _FriendListState extends State<FriendList> {
-
   @override
   Widget build(BuildContext context) {
-    
-    final friends = Provider.of<List<User>>(context) ?? [];
-    
+    final friends = Provider.of<List<Person>>(context) ?? [];
+
     if (friends.length == 0) {
       return Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget> [
-            Text("You have no friends."),
-          ]
-        ),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("You have no friends."),
+            ]),
       );
     } else {
-    return Container(
-      child: ListView.builder(
-        itemCount: friends.length,
-        itemBuilder: (context, index){
-          return FriendTile(friend: friends[index]);
-          }
-        )
-      );
+      return Container(
+          child: ListView.builder(
+              itemCount: friends.length,
+              itemBuilder: (context, index) {
+                return FriendTile(friend: friends[index]);
+              }));
     }
   }
-
-  
 }

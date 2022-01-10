@@ -13,19 +13,17 @@ class FriendRequests extends StatefulWidget {
 class _FriendRequestsState extends State<FriendRequests> {
   @override
   Widget build(BuildContext context) {
+    Person user = Provider.of<Person>(context);
 
-    User user = Provider.of<User>(context);
-    
     return StreamProvider.value(
       value: DatabaseService(uid: user.uid).requests,
       child: Scaffold(
-        appBar: AppBar(
-          title: Text("Friend Requests"),
-          centerTitle: true,
-          backgroundColor: Colors.orange,
-        ),
-        body: FriendReqList()
-      ),
+          appBar: AppBar(
+            title: Text("Friend Requests"),
+            centerTitle: true,
+            backgroundColor: Colors.orange,
+          ),
+          body: FriendReqList()),
     );
   }
 }

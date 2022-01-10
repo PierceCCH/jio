@@ -8,17 +8,14 @@ import 'package:provider/provider.dart';
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     //accessing user data from provider
-    final user = Provider.of<User>(context);
+    final user = Provider.of<Person>(context);
 
-    if (user == null){
+    if (user == null) {
       return Authenticate();
-    }
-    else{
+    } else {
       return StreamProvider.value(
-        value: DatabaseService(uid: user.uid).userData,
-        child: Home());
+          value: DatabaseService(uid: user.uid).userData, child: Home());
     }
   }
 }

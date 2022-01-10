@@ -11,15 +11,10 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        StreamProvider<User>.value(
-          value: AuthService().userStream,
-          ),
-        ],
-       child: MaterialApp(
-        home: Wrapper()
-      )
-    );
+    return MultiProvider(providers: [
+      StreamProvider<Person>.value(
+        value: AuthService().userStream,
+      ),
+    ], child: MaterialApp(home: Wrapper()));
   }
 }
