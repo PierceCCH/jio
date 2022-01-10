@@ -241,7 +241,8 @@ class _HomeState extends State<Home> {
       Padding(
         padding: const EdgeInsets.only(left: 10.0),
         child: Text(
-          "${userData.name}",
+          "Pierce",
+          // "${userData.name}",
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
